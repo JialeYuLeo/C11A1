@@ -24,7 +24,7 @@ class RBFRegression():
         self.K = centers.shape[0]
 
         # Remember that we have K weights and 1 bias.
-        self.parameters = np.ones((self.K + 1, 1), dtype=np.float)
+        self.parameters = np.ones((self.K + 1, 1), dtype=float)
 
     def _rbf_2d(self, X, rbf_i):
         """ This private method computes the output of the i'th 2D radial basis function given the inputs.
@@ -74,7 +74,19 @@ class RBFRegression():
 
         # ====================================================
         # TODO: Implement your solution within the box
+        print(len(X))
+        print(self.K)
         
+        B = np.ones((len(X),1),dtype=float)
+        for k in range (self.K):
+            B = np.hstack((B,self._rbf_2d(X,k)))
+        print(B)
+        print(self.parameters.T)
+        print(B.ndim)
+        print(self.parameters.ndim)
+        return np.matmul (B,self.parameters)
+
+
         # ====================================================
     
     def fit_with_l2_regularization(self, train_X, train_Y, l2_coef):
@@ -100,6 +112,11 @@ class RBFRegression():
         # ====================================================
         # TODO: Implement your solution within the box
         
+        N = len(train_X)
+        B = np.ones((N,1),dtype=float)
+        for k in range (self.K):
+            B = np.hstack((B,self._rbf_2d(train_X,k)))
+        self.parameters = np.linalg.inv(B.T @ B + l2_coef * np.eye(self.K+1)) @ B.T @ train_Y
         # ====================================================
 
         assert self.parameters.shape == (self.K + 1, 1)
