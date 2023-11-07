@@ -74,17 +74,14 @@ class RBFRegression():
 
         # ====================================================
         # TODO: Implement your solution within the box
-        print(len(X))
-        print(self.K)
-        
+        #bias term
         B = np.ones((len(X),1),dtype=float)
+        #calculate b_i(x)
         for k in range (self.K):
             B = np.hstack((B,self._rbf_2d(X,k)))
-        print(B)
-        print(self.parameters.T)
-        print(B.ndim)
-        print(self.parameters.ndim)
-        return np.matmul (B,self.parameters)
+        #wi * b_i
+        result = B @ self.parameters
+        return result
 
 
         # ====================================================
