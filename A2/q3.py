@@ -8,7 +8,6 @@ def sigmoid(x):
 # Gradient descent function
 def gradient_descent(X, y, theta, learning_rate, iterations):
 
-    cost_history = np.zeros(iterations)
 
     for i in range(iterations):
         p = sigmoid(np.dot(X, theta))
@@ -22,7 +21,7 @@ X = np.array([[4, 4,1],[6,4,1] ,[6,5,1], [6,8,1], [6,10,1], [8, 8,1], [8, 10,1]]
 y = np.array([1,1,1,0,0,1,0])  # labels
 theta = np.array([0.3, -0.2, 0.7])  # initial parameters
 learning_rate = 0.01
-iterations = 3
+iterations = 2
 
 theta = gradient_descent(X, y, theta, learning_rate, iterations)
 print(theta)
